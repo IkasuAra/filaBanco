@@ -21,8 +21,7 @@ public class Main {
             System.out.print("Opção: ");
             
             option = input.nextInt();
-
-            
+  
             switch (option) {
                 case 1:
                     System.out.print("Insira o nome: ");
