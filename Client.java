@@ -1,34 +1,29 @@
 public class Client {
     private String name;
     private int age;
-    
-    public Client(int age, string name){
-        setAge(age);
-        setName(name);
-    }
 
-    private void setAge(int age){
-        this.age = age;
-    }
-
-    private void setName(String name){
+    public Client(String name, int age) {
         this.name = name;
+        this.age = age;
+        validationAge();
     }
 
-      public int getAge(){
-        return this.age;
+    public String getName() {
+        return name;
     }
 
-    public String getName(){
-        return this.name;
+    public int getAge() {
+        return age;
     }
 
-    public boolean validationAge(){
-        if(age > 16){
+    public boolean isElderly() {
+        return (age >= 60);
+    }
+    
+    public void validationAge(){
+        if(this.age < 16){
             this.age = 18;
-            return false;
         }
-        return true;
     }
 
     public boolean validationName(){
@@ -39,8 +34,4 @@ public class Client {
         }
         return true;
     }
-
-    public boolean isElderly(){
-        return (age >= 60);
-    }    
 }
