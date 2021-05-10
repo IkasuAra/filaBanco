@@ -35,8 +35,7 @@ public class ManageAttendance {
     }
 
     public void decideNextClient() {
-        if(numElderlyClients() > 0 && elderlyCounter < 2) {
-            elderlyCounter++;
+        if(numElderlyClients() > 0 && elderlyCounter < 2) {            
             nextClient = true;
             return;
         }
@@ -45,6 +44,7 @@ public class ManageAttendance {
     }
 
     public Client showNext() {
+        decideNextClient();
         if(nextClient) {
             return elderly.peek();
         }
@@ -52,7 +52,9 @@ public class ManageAttendance {
     }
 
     public Client getNext() {
+        decideNextClient();
         if(nextClient) {
+            elderlyCounter++;
             return elderly.dequeue();
         }
 
