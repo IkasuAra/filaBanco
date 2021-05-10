@@ -26,7 +26,7 @@ public class Client {
         }
     }
 
-    public boolean validationName(){
+    public static boolean validationName(String name){
         for (int i = 0; i < 4; i++) {
             if(name.charAt(i) == ' '){
                 return false;
