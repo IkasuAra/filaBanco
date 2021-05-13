@@ -70,9 +70,9 @@ public class ManageAttendance {
     }
 
     public String showQueues() {
-        String saida = "\n*Filas*\nidoso:";
-        saida += elderly.show();
-        saida += "normal:" + normal.show();
-        return saida;
+        String output = "\n*Filas*\nidoso:";
+        output += elderly.show();
+        output += "normal:" + normal.show();
+        return output;
     }
 }

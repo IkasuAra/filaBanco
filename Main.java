@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main { 
     public static void main(String[] args) {
         System.out.println("*****Banco Dinheiro na Mão*****");
-        ManageAttendance manager = new ManageAttendance(2);
+        ManageAttendance manager = new ManageAttendance(5);
         Scanner input = new Scanner(System.in);
         boolean endOfProgram = true;
         int option = 0, age;
@@ -20,7 +20,7 @@ public class Main {
             System.out.println("5 - Finalizar o programa (só poderá ser finalizado caso não tenha mais clientes aguardando)");
             System.out.print("Opção: ");
             
-            option = Tool.testarInteiro(input);            
+            option = Tool.convertStringToInt(input);            
   
             switch (option) {
                 case 1:
@@ -30,7 +30,7 @@ public class Main {
                     }while(!Client.validationName(name));
                     do{
                         System.out.print("Insira a idade: ");
-                        age = Tool.testarInteiro(input);
+                        age = Tool.convertStringToInt(input);
                     }while(!Client.validationAge(age));
                     newClient = new Client(name, age);                            
                     manager.addClient(newClient);

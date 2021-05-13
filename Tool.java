@@ -2,20 +2,20 @@ import java.util.Scanner;
 
 public class Tool {
     
-    public static int testarInteiro(Scanner input) {
-        boolean testeInteiro = true;
-        String testeEscolha;
-        int escolha = 0;
+    public static int convertStringToInt(Scanner input) {
+        boolean continueLoop = true;
+        String optionAsString;
+        int optionAsInt = 0;
         do {
-            testeEscolha = input.nextLine();
+            optionAsString = input.nextLine();
             try {
-                escolha = Integer.parseInt(testeEscolha);
-                testeInteiro = false;
+                optionAsInt = Integer.parseInt(optionAsString);
+                continueLoop = false;
             } catch (Exception e) {
                 System.out.println("Você não digitou um número! Digite novamente.");
-                testeInteiro = true;
+                continueLoop = true;
             }
-        } while (testeInteiro);
-        return escolha;
+        } while (continueLoop);
+        return optionAsInt;
     }
 }
