@@ -42,7 +42,6 @@ public class ManageAttendance {
             nextClient = true;
             return;
         }
-        elderlyCounter = 0;
         nextClient = false;
     }
 
@@ -66,6 +65,7 @@ public class ManageAttendance {
             elderlyCounter++;
             return elderly.dequeue();
         }
+        elderlyCounter = 0;
         return normal.dequeue();
     }
 
