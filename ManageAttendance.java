@@ -1,101 +1,78 @@
 public class ManageAttendance {
-    private String[] queue;
-    private int size;
-    private int addElderly;
-    private Client cli;
+    private Queue elderly;
+    private Queue normal;
+    private int elderlyCounter;
+    private boolean nextClient;
+    private Client inexistent;
 
-    public ManageAttendance(){
-        cli = new Client("Lucas", 25);
-    }
-
-    public ManageAttendance(int size){
-        this.queue = new String[size];
-        this.addElderly = 0;
-        this.size = 0;
+    public ManageAttendance(int size) {
+        this.elderly = new Queue(size);
+        this.normal = new Queue(size);
+        this.elderlyCounter = 0;
+        this.inexistent = new Client("Não há", 0);
     }
 
     
-    public String[] getQueue() {
-        return queue;
+    public boolean isEmpty() {
+        return (elderly.isEmpty() && normal.isEmpty());
     }
 
-    public int getSize(){
-        return size;
+    public int numClients() {
+        return (elderly.size() + normal.size());
     }
 
-    public Client getCli() {
-        return cli;
+    public int numElderlyClients() {
+        return elderly.size();
     }
 
-    public int getAddelderly(){
-        return addElderly;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }    
-
-    public void setCli(Client cli) {
-        this.cli = cli;
-    }
-
-    public void setAddelderly(int addElderly){
-        this.addElderly++;
-    }
-
-
-    public boolean isEmpty(){
-        return (size == 0);
-    }
-    
-    public int numClients(){
-        return size;
-    }
-
-    public int numElderlyClients(){
-        return addElderly;
-    }
-
-    public void addClient(Client cli){
-        queue[size] = cli;
-        size++;
-    }
-
-    public Client showNext(){
-        if(!isEmpty()){
-            return queue[0];
+    public void addClient(Client cli) {
+        if(cli.isElderly() && !elderly.isFull()) {
+            elderly.enqueue(cli);
+            return;
         }
-        return "vazia";
+        else if(!cli.isElderly() && !normal.isFull()) {
+            normal.enqueue(cli);
+            return;
+        }
+        System.out.println("Fila de atendimento cheia. Volte em outro horário");        
     }
 
-    public Client getNext(){
-        if(isEmpty()){
-            return "vazia";
+    public void decideNextClient() {
+        if(numElderlyClients() > 0 && elderlyCounter < 2) {            
+            nextClient = true;
+            return;
         }
-        String aux = queue[0];
-        for (int i = 0; i < (size - 1); i++){
-            queue[i] = queue[i+1];
-        }
-        size--;
-        return aux;
+        elderlyCounter = 0;
+        nextClient = false;
     }
 
-    public boolean isFull(){
-        if(size == queue.length){
-            System.out.println("A fila está cheia, novo cliente não foi inserido.");
-            return true;
+    public Client showNext() {
+        decideNextClient();
+        if(elderly.isEmpty() && normal.isEmpty()) {
+            return inexistent;
         }
-        return false;
+        if(nextClient) {
+            return elderly.peek();
+        }
+        return normal.peek();
     }
 
-    public String showQueues(){
-        String element = "";
-        for (int i = 0; i < size; i++){
-            if(queue[i] == " "){
-                queue[i] = "vazia";
-            }
-            element = element + queue[i] + "-";
+    public Client getNext() {
+        decideNextClient();
+        if(elderly.isEmpty() && normal.isEmpty()) {
+            return inexistent;
         }
-        return element;
+        if(nextClient) {
+            elderlyCounter++;
+            return elderly.dequeue();
+        }
+        return normal.dequeue();
+    }
+
+    public String showQueues() {
+        String saida = "\n*Filas*\nidoso:";
+        saida += elderly.show();
+        saida += "normal:" + normal.show();
+        return saida;
     }
 }

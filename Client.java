@@ -1,46 +1,47 @@
 public class Client {
     private String name;
     private int age;
-    
-    public Client(int age, string name){
-        setAge(age);
-        setName(name);
-    }
 
-    private void setAge(int age){
+    public Client(){}
+
+    public Client(String name, int age) {
+        this.name = name;
         this.age = age;
     }
 
-    private void setName(String name){
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
-      public int getAge(){
-        return this.age;
+    public int getAge() {
+        return age;
     }
 
-    public String getName(){
-        return this.name;
+    public boolean isElderly() {
+        return (age >= 60);
     }
-
-    public boolean validationAge(){
-        if(age > 16){
-            this.age = 18;
+    
+    public static boolean validationAge(int age){
+        if(age < 16){
+            System.out.println("Idade inválida. A idade mínima deve ser acima de 16 anos.");
             return false;
         }
         return true;
     }
 
-    public boolean validationName(){
-        for (int i = 0; i < 4; i++) {
-            if(name.charAt(i) == ' '){
-                return false;
-            }
+    public static boolean validationName(String name){
+        String msg = "Nome inválido! Digite novamente.";
+        if(name.length() < 5){
+            System.out.println(msg);
+            return false;
+        }else{
+            for (int i = 0; i < 5 ; i++) {
+                if(name.charAt(i) == ' '){
+                    System.out.println(msg);
+                    return false;
+                }
+            }    
         }
         return true;
     }
-
-    public boolean isElderly(){
-        return (age >= 60);
-    }    
 }
