@@ -17,10 +17,10 @@ public class Main {
             System.out.println("2 - Verificar quem é o próximo a ser atendido");
             System.out.println("3 - Atender um cliente");
             System.out.println("4 - Exibir as filas (idoso e não idoso)");
-            System.out.println("5 - Finalizar o programa (só poderá ser finalizado caso não tenha mais clientes aguardando");
+            System.out.println("5 - Finalizar o programa (só poderá ser finalizado caso não tenha mais clientes aguardando)");
             System.out.print("Opção: ");
             
-            option = Ferramenta.testarInteiro(input);            
+            option = Tool.testarInteiro(input);            
   
             switch (option) {
                 case 1:
@@ -30,7 +30,7 @@ public class Main {
                     }while(!Client.validationName(name));
                     do{
                         System.out.print("Insira a idade: ");
-                        age = Ferramenta.testarInteiro(input);
+                        age = Tool.testarInteiro(input);
                     }while(!Client.validationAge(age));
                     newClient = new Client(name, age);                            
                     manager.addClient(newClient);

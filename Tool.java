@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Ferramenta {
+public class Tool {
     
     public static int testarInteiro(Scanner input) {
         boolean testeInteiro = true;
