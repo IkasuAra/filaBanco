@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
-public class Main {
+public class Main { 
     public static void main(String[] args) {
         System.out.println("*****Banco Dinheiro na Mão*****");
-        ManageAttendance manager = new ManageAttendance(2);
+        ManageAttendance manager = new ManageAttendance(5);
         Scanner input = new Scanner(System.in);
         boolean endOfProgram = true;
         int option = 0, age;
@@ -17,18 +17,22 @@ public class Main {
             System.out.println("2 - Verificar quem é o próximo a ser atendido");
             System.out.println("3 - Atender um cliente");
             System.out.println("4 - Exibir as filas (idoso e não idoso)");
-            System.out.println("5 - Finalizar o programa (só poderá ser finalizado caso não tenha mais clientes aguardando");
+            System.out.println("5 - Finalizar o programa (só poderá ser finalizado caso não tenha mais clientes aguardando)");
             System.out.print("Opção: ");
             
-            option = input.nextInt();
+            option = Tool.convertStringToInt(input);            
   
             switch (option) {
                 case 1:
-                    System.out.print("Insira o nome: ");
-                    name = input.next();
-                    System.out.print("Insira a idade: ");
-                    age = input.nextInt();                            
-                    newClient = new Client(name, age);
+                    do{
+                        System.out.print("Insira o nome: ");
+                        name = input.nextLine();
+                    }while(!Client.validationName(name));
+                    do{
+                        System.out.print("Insira a idade: ");
+                        age = Tool.convertStringToInt(input);
+                    }while(!Client.validationAge(age));
+                    newClient = new Client(name, age);                            
                     manager.addClient(newClient);
                     break;
                 case 2:

@@ -48,7 +48,9 @@ public class Queue {
 
     public String show() {
         String elem = "";
-
+        if(isEmpty()){
+            elem = "vazia;";
+        }
         for (int i = 0; i < indexEnd; i++) {
             elem = elem + array[i].getName() + ":" + array[i].getAge();
             if(i == indexEnd - 1) {
@@ -58,7 +60,6 @@ public class Queue {
                 elem += "-";
             }
         }
-
         return elem;
     }
 }

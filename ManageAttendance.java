@@ -3,13 +3,16 @@ public class ManageAttendance {
     private Queue normal;
     private int elderlyCounter;
     private boolean nextClient;
+    private Client inexistent;
 
     public ManageAttendance(int size) {
         this.elderly = new Queue(size);
         this.normal = new Queue(size);
         this.elderlyCounter = 0;
+        this.inexistent = new Client("Não há", 0);
     }
 
+    
     public boolean isEmpty() {
         return (elderly.isEmpty() && normal.isEmpty());
     }
@@ -24,8 +27,8 @@ public class ManageAttendance {
 
     public void addClient(Client cli) {
         if(cli.isElderly() && !elderly.isFull()) {
-                elderly.enqueue(cli);
-                return;
+            elderly.enqueue(cli);
+            return;
         }
         else if(!cli.isElderly() && !normal.isFull()) {
             normal.enqueue(cli);
@@ -39,12 +42,14 @@ public class ManageAttendance {
             nextClient = true;
             return;
         }
-        elderlyCounter = 0;
         nextClient = false;
     }
 
     public Client showNext() {
         decideNextClient();
+        if(elderly.isEmpty() && normal.isEmpty()) {
+            return inexistent;
+        }
         if(nextClient) {
             return elderly.peek();
         }
@@ -53,18 +58,21 @@ public class ManageAttendance {
 
     public Client getNext() {
         decideNextClient();
+        if(elderly.isEmpty() && normal.isEmpty()) {
+            return inexistent;
+        }
         if(nextClient) {
             elderlyCounter++;
             return elderly.dequeue();
         }
-
+        elderlyCounter = 0;
         return normal.dequeue();
     }
 
     public String showQueues() {
-        String saida = "\n*Filas*\nidoso:";
-        saida += elderly.show();
-        saida += "normal:" + normal.show();
-        return saida;
+        String output = "\n*Filas*\nidoso:";
+        output += elderly.show();
+        output += "normal:" + normal.show();
+        return output;
     }
 }
