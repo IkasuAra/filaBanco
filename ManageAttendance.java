@@ -38,7 +38,7 @@ public class ManageAttendance {
     }
 
     public void decideNextClient() {
-        if(numElderlyClients() > 0 && elderlyCounter < 2) {            
+        if(numElderlyClients() > 0 && elderlyCounter < 2 || normal.isEmpty()) {            
             nextClient = true;
             return;
         }
